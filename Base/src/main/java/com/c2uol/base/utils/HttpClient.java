@@ -98,7 +98,7 @@ public class HttpClient {
 			}
 
 			/* 检查请求方式 */
-			if (StringUtil.isEmpty(method) || (!NetworkConstants.GET.equals(method) && !method.equals(NetworkConstants.POST))) {
+			if (StringValidate.isEmpty(method) || (!NetworkConstants.GET.equals(method) && !method.equals(NetworkConstants.POST))) {
 				method = NetworkConstants.GET;
 			}
 			conn.setRequestMethod(method);
@@ -106,7 +106,7 @@ public class HttpClient {
 			conn.setDoOutput(true);
 
 			/* 如果是post请求，并且请求全文不是空，写入数据 */
-			if (NetworkConstants.POST.equals(method) && !StringUtil.isEmpty(content)) {
+			if (NetworkConstants.POST.equals(method) && !StringValidate.isEmpty(content)) {
 				OutputStream out = conn.getOutputStream();
 				out.write(content.getBytes());
 				out.flush();
