@@ -27,11 +27,11 @@
 	</bean>
 
 	<bean id="jedisPool_db" class="redis.clients.jedis.JedisPool" destroy-method="destroy">
-		<constructor-arg ref="jedisConfig" />
-		<constructor-arg value="${db.redis.host}" />
-		<constructor-arg value="${db.redis.port}" />
-		<constructor-arg value="${db.redis.timeout}" type="int" />
-		<constructor-arg value="${db.redis.passwd}" />
+		<constructor-arg name="poolConfig" ref="jedisConfig" />
+		<constructor-arg name="host" value="${db.redis.host}" />
+		<constructor-arg name="port" value="${db.redis.port}" type="int"/>
+		<constructor-arg name="timeout" value="${db.redis.timeout}" type="int" />
+		<constructor-arg name="password" value="${db.redis.passwd}" />
 	</bean>
 
 	<!-- 注入数据到连接池工具 -->
