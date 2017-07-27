@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.c2uol.base.redis.RedisClient;
+
 import redis.clients.jedis.Jedis;
 
 public class RedisSourcePoolTester {
