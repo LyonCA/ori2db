@@ -1,5 +1,6 @@
 package com.c2uol.base.utils;
 
+
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -26,6 +27,10 @@ public class RedisSourcePool {
 
 	@Resource
 	public Map<String, JedisPool> jedisPoolMap;
+
+	public RedisSourcePool() {
+
+	}
 
 	/**
 	 * 

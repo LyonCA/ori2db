@@ -18,12 +18,19 @@ public class RedisSourcePoolTester {
 		applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
 	}
 
-	@Test
+	// @Test
 	public void testerGetConnection() {
 		RedisSourcePool redisSourcePool = applicationContext.getBean("redisSourcePool", RedisSourcePool.class);
 		Jedis jedis = redisSourcePool.getResrouce("jedisPool_default");
 		jedis.select(0);
 		jedis.set("tester", "hello world");
 		jedis.close();
+	}
+
+	@Test
+	public void testerRedisClient() {
+		RedisClient redisClient = applicationContext.getBean("redisClient", RedisClient.class);
+		String data = redisClient.get("tester");
+		System.out.println(data);
 	}
 }
