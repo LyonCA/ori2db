@@ -21,7 +21,7 @@ public class RedisSourcePoolTester {
 		RedisSourcePool redisSourcePool = applicationContext.getBean("redisSourcePool", RedisSourcePool.class);
 		Jedis jedis = redisSourcePool.getResrouce("jedisPool_default");
 		jedis.select(0);
-		jedis.set("tester", "hello");
+		jedis.set("tester", "hello world");
 		jedis.close();
 	}
 }
