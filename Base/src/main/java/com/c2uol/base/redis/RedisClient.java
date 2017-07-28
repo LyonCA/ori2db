@@ -18,35 +18,35 @@ import redis.clients.jedis.Jedis;
 @Repository
 public class RedisClient {
 
-	private Logger logger = LogManager.getLogger(RedisClient.class);
+    private Logger logger = LogManager.getLogger(RedisClient.class);
 
-	@Resource
-	RedisSourcePool redisSourcePool;
+    @Resource
+    RedisSourcePool redisSourcePool;
 
-	public RedisClient() {
+    public RedisClient() {
 
-	}
+    }
 
-	private Jedis jedis = null;
+    private Jedis jedis = null;
 
-	/**
-	 * 
-	 * @描述: redis get
-	 * @参数: @param key
-	 * @参数: @return
-	 * @返回值: String
-	 * @版本: v1.0
-	 * @时间: 2017年7月28日上午2:35:05
-	 *
-	 */
-	public String get(String key) {
-		try {
-			return jedis.get(key);
-		} catch (Exception e) {
-			logger.error("", e);
-		} finally {
-			jedis.close();
-		}
-		return null;
-	}
+    /**
+     * 
+     * @描述: redis get
+     * @参数: @param key
+     * @参数: @return
+     * @返回值: String
+     * @版本: v1.0
+     * @时间: 2017年7月28日上午2:35:05
+     *
+     */
+    public String get(String key) {
+        try {
+            return jedis.get(key);
+        } catch (Exception e) {
+            logger.error("", e);
+        } finally {
+            jedis.close();
+        }
+        return null;
+    }
 }

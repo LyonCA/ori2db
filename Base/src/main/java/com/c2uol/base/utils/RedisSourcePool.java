@@ -1,6 +1,5 @@
 package com.c2uol.base.utils;
 
-
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -23,47 +22,47 @@ import redis.clients.jedis.JedisPool;
 @Repository
 public class RedisSourcePool {
 
-	private Logger logger = LogManager.getLogger(RedisSourcePool.class);
+    private Logger logger = LogManager.getLogger(RedisSourcePool.class);
 
-	@Resource
-	public Map<String, JedisPool> jedisPoolMap;
+    @Resource
+    public Map<String, JedisPool> jedisPoolMap;
 
-	public RedisSourcePool() {
+    public RedisSourcePool() {
 
-	}
+    }
 
-	/**
-	 * 
-	 * @描述: 获取数据源
-	 * @参数: @param redisPoolKey
-	 * @参数: @return
-	 * @返回值: Jedis
-	 * @版本: v1.0
-	 * @时间: 2017年7月27日下午11:03:45
-	 *
-	 */
-	public Jedis getResrouce(String redisPoolKey) throws NullPointerException {
-		if (StringValidate.isEmpty(redisPoolKey)) {
-			logger.error("获取数据源失败！数据源key为空！");
-			return null;
-		}
-		if (!jedisPoolMap.containsKey(redisPoolKey)) {
-			logger.error("获取数据源失败！数据源{}不存在！", redisPoolKey);
-			return null;
-		}
-		logger.debug("获取key为{}的数据源开始！", redisPoolKey);
-		Jedis jedis = null;
-		try {
-			jedis = jedisPoolMap.get(redisPoolKey).getResource();
-		} catch (Exception e) {
-			logger.error("从数据源{}获取连接对象异常！", redisPoolKey, e);
-		}
+    /**
+     * 
+     * @描述: 获取数据源
+     * @参数: @param redisPoolKey
+     * @参数: @return
+     * @返回值: Jedis
+     * @版本: v1.0
+     * @时间: 2017年7月27日下午11:03:45
+     *
+     */
+    public Jedis getResrouce(String redisPoolKey) throws NullPointerException {
+        if (StringValidate.isEmpty(redisPoolKey)) {
+            logger.error("获取数据源失败！数据源key为空！");
+            return null;
+        }
+        if (!jedisPoolMap.containsKey(redisPoolKey)) {
+            logger.error("获取数据源失败！数据源{}不存在！", redisPoolKey);
+            return null;
+        }
+        logger.debug("获取key为{}的数据源开始！", redisPoolKey);
+        Jedis jedis = null;
+        try {
+            jedis = jedisPoolMap.get(redisPoolKey).getResource();
+        } catch (Exception e) {
+            logger.error("从数据源{}获取连接对象异常！", redisPoolKey, e);
+        }
 
-		if (jedis != null) {
-			logger.debug("从{}获取到连接对象成功！", redisPoolKey);
-		} else {
-			logger.error("从{}获取到连接对象失败！", redisPoolKey);
-		}
-		return jedis;
-	}
+        if (jedis != null) {
+            logger.debug("从{}获取到连接对象成功！", redisPoolKey);
+        } else {
+            logger.error("从{}获取到连接对象失败！", redisPoolKey);
+        }
+        return jedis;
+    }
 }
