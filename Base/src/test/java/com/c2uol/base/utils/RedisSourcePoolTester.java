@@ -15,7 +15,7 @@ public class RedisSourcePoolTester {
 
     @Before
     public void init() {
-        applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");    
+        applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
     }
 
     // @Test
@@ -32,7 +32,6 @@ public class RedisSourcePoolTester {
         RedisClient redisClient = applicationContext.getBean("redisClient", RedisClient.class);
         redisClient.conf("jedisPool_default", 1);
         String data = redisClient.get("tester");
-
         System.out.println(data);
     }
 }

@@ -1,14 +1,13 @@
 package com.c2uol.base.redis;
 
 import javax.annotation.Resource;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
-
 import com.c2uol.base.redis.exception.RedisClientException;
 import com.c2uol.base.utils.RedisSourcePool;
-import com.c2uol.base.utils.StringValidate;
 
 import redis.clients.jedis.Jedis;
 
@@ -29,7 +28,7 @@ public class RedisClient {
     @Resource
     RedisSourcePool redisSourcePool;
 
-    public RedisClient(String db_name, int node) {
+    public RedisClient() {
 
     }
 
@@ -74,6 +73,7 @@ public class RedisClient {
      *
      */
     public String get(String key) {
+        validate();
         try {
             return jedis.get(key);
         } catch (Exception e) {
@@ -85,8 +85,8 @@ public class RedisClient {
     }
 
     public void set(String key, String value, long expire) {
-        
-    }   
+
+    }
 
     public void set(String key, String value) {
         try {
