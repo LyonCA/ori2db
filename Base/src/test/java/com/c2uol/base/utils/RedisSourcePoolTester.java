@@ -11,26 +11,28 @@ import redis.clients.jedis.Jedis;
 
 public class RedisSourcePoolTester {
 
-	ApplicationContext applicationContext;
+    ApplicationContext applicationContext;
 
-	@Before
-	public void init() {
-		applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
-	}
+    @Before
+    public void init() {
+        applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");    
+    }
 
-	// @Test
-	public void testerGetConnection() {
-		RedisSourcePool redisSourcePool = applicationContext.getBean("redisSourcePool", RedisSourcePool.class);
-		Jedis jedis = redisSourcePool.getResrouce("jedisPool_default");
-		jedis.select(0);
-		jedis.set("tester", "hello world");
-		jedis.close();
-	}
+    // @Test
+    public void testerGetConnection() {
+        RedisSourcePool redisSourcePool = applicationContext.getBean("redisSourcePool", RedisSourcePool.class);
+        Jedis jedis = redisSourcePool.getResrouce("jedisPool_default");
+        jedis.select(0);
+        jedis.set("tester", "hello world");
+        jedis.close();
+    }
 
-	@Test
-	public void testerRedisClient() {
-		RedisClient redisClient = applicationContext.getBean("redisClient", RedisClient.class);
-		String data = redisClient.get("tester");
-		System.out.println(data);
-	}
+    @Test
+    public void testerRedisClient() {
+        RedisClient redisClient = applicationContext.getBean("redisClient", RedisClient.class);
+        redisClient.conf("jedisPool_default", 1);
+        String data = redisClient.get("tester");
+
+        System.out.println(data);
+    }
 }
